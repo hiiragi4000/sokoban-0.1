@@ -58,7 +58,7 @@ bool Board_read(Board *this, FILE *fin){
    this->m_cnt = 0;
    for(int i=0; i<=this->height-1; ++i){
       if(!fgets(this->board[i], WIDTH_MAX+2, fin)){
-         assert(0);
+         assert(false);
       }
       this->board[i][this->width] = 0;
       for(int j=0; j<=this->width-1; ++j) switch(this->board[i][j]){

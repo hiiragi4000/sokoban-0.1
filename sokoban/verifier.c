@@ -6,6 +6,7 @@
 #include<assert.h>
 #include<ctype.h>
 #include<stdbool.h>
+#include<stddef.h>
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -82,7 +83,7 @@ void Output_verifier(FILE *fin){
 }
 
 int main(int argc, char **argv){
-   char *input=0, *output=0;
+   char *input=NULL, *output=NULL;
 #define WRONG_ARG do{\
    puts("Usage: verifier [-i infile] [-o outfile]");\
    puts("-i infile: if specified, check if the file \'infile\' is a valid input");\
@@ -100,7 +101,7 @@ int main(int argc, char **argv){
       }else WRONG_ARG;
    }
    if(!input && !output) WRONG_ARG;
-   FILE *fpi=0, *fpo=0;
+   FILE *fpi=NULL, *fpo=NULL;
    if(input){
       fpi = fopen(input, "r");
       if(!fpi){
@@ -129,9 +130,9 @@ int main(int argc, char **argv){
             continue;
          }
          char *sol = malloc(n+2);
-         if(!fgets(sol, n+2, fpo)){
+         if(!fgets(sol, sizeof sol, fpo)){
             // never happens
-            assert(0);
+            assert(false);
          }
          bool ac = true;
          for(int i=0; i<=n-1; ++i){
@@ -147,7 +148,7 @@ int main(int argc, char **argv){
          free(sol);
       }
       char tail[2];
-      if(fgets(tail, 2, fpo)){
+      if(fgets(tail, sizeof tail, fpo)){
          puts("Output Limit Exceeded");
       }
    }

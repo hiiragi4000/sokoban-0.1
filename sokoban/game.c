@@ -3,6 +3,7 @@
 #include"getch.h"
 #include"sokoban.h"
 #include<ctype.h>
+#include<errno.h>
 #include<stdbool.h>
 #include<stddef.h>
 #include<stdio.h>
@@ -65,7 +66,7 @@ int main(int argc, char **argv){
    return 1;\
 }while(0)
    char *input_filename = NULL, *output_filename = NULL;
-   int start_stage = 0;
+   long start_stage = 0;
    for(int i=1; i<=argc-1; ++i){
       if(!strcmp(argv[i], "-i")){
          if(++i==argc || input_filename){
@@ -81,8 +82,12 @@ int main(int argc, char **argv){
          if(++i==argc || start_stage){
             SOKOBAN_WRONG_ARG;
          }
-         start_stage = atoi(argv[i]);
-         if(start_stage <= 0){
+         char *end;
+         start_stage = strtol(argv[i], &end, 10);
+         int offset;
+         sscanf(end, " %n", &offset);
+         end += offset;
+         if(errno || *end || start_stage<=0){
             SOKOBAN_WRONG_ARG;
          }
       }else SOKOBAN_WRONG_ARG;
@@ -136,7 +141,7 @@ int main(int argc, char **argv){
    puts("Press \033[1;35mP\033[m to pause.");
    puts("Press \033[1;35mU\033[m to undo.");
    putchar('\n');
-   for(int stage=1; Board_read(&Brd, fin); ++stage){
+   for(long stage=1; Board_read(&Brd, fin); ++stage){
       if(stage < start_stage){
          if(fout){
             fprintf(fout, "0\n\n");
@@ -144,7 +149,7 @@ int main(int argc, char **argv){
          continue;
       }
 restart:
-      printf("\033[1;36mStage #%d:\033[m\n\n", stage);
+      printf("\033[1;36mStage #%ld:\033[m\n\n", stage);
       Draw(false);
       while(Brd.m_cnt){
          char cmd = tolower(getch());
