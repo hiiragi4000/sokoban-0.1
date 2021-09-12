@@ -1,4 +1,4 @@
-CC = gcc -std=c11 -O2 -Wall
+CC = gcc -std=c11 -O3 -Wall -Wpedantic -Wextra
 DEL = rm -f
 all:
 	$(CC) *.c -c
