@@ -6,7 +6,7 @@ Under UNIX, simply run
 ```
 $ make
 ```
-to build the execution files, `game` and `verifier`.
+under the directory `sokoban` to build the execution files, `game` and `verifier`.
 
 ## Legend
 `#`: wall square
