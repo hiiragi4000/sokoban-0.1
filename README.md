@@ -24,6 +24,6 @@ under the directory `sokoban` to build the execution files, `game` and `verifier
 `-`: non-goal square
 
 ## Control
-Use arroy keys or `W`, `A`, `S`, `D` to move.
+Use arrow keys or `W`, `A`, `S`, `D` to move.
 
 Press `P` to pause. You can either resume, go to the next stage, or quit the game directly.
