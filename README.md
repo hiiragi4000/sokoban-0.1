@@ -1,17 +1,29 @@
 # Sokoban 0.1
-A sokoban (倉庫番) game written in C. It should be run under unix.
+A sokoban (倉庫番) game written in C. It should be run under UNIX.
+
+## How to Run
+Under UNIX, simply run
+```
+$ make
+```
+to build the execution files, `game` and `verifier`.
 
 ## Legend
-`-`: non-goal space
+`#`: wall square
 
-`#`: wall
+`@`: player on a non-goal square
 
-`.`: goal without box
+`+`: player on a goal square
 
-`*`: goal with box
+`$`: box on a non-goal square
 
-`$`: box on a non-goal space
+`*`: box on a goal square
 
-`@`: the player on a non-goal space
+`.`: goal square
 
-`+`: the player on a goal space
+`-`: non-goal square
+
+## Control
+Use arroy keys or `W`, `A`, `S`, `D` to move.
+
+Press `P` to pause. You can either resume, go to the next stage, or quit the game directly.
